@@ -1,0 +1,183 @@
+/* fonts */
+@import url("https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@600;700&display=swap");
+
+/* Background */
+$radial: hsl(214, 47%, 23%);
+$dark-radial: hsl(237, 49%, 15%);
+
+/* Header colors */
+$lighter-gray: hsl(217, 16%, 45%);
+$light-blue: hsl(229, 64%, 46%);
+$dark-gray: hsl(229, 25%, 31%);
+
+/* card colors */
+$blue-primary: hsl(230, 89%, 65%);
+$blue-gradient: hsl(230, 89%, 62%);
+$yellow-gradient: hsl(39, 89%, 49%);
+$yellow-primary: hsl(40, 84%, 53%);
+$red-primary: hsl(349, 70%, 56%);
+$red-gradient: hsl(349, 71%, 52%);
+$light-gray: rgba(128, 128, 128, 0.331);
+
+*,
+::before,
+::after {
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Kumbh Sans", sans-serif;
+  background: linear-gradient($radial, $dark-radial);
+}
+.header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  height: 100px;
+  border: 2px solid $lighter-gray;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  /* margin-bottom: 30%; */
+
+  &__text {
+    display: block;
+    width: 70%;
+    margin-top: auto;
+    margin-bottom: auto;
+    color: white;
+    font-size: 0.6rem;
+    line-height: 16px;
+  }
+  &__score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+    height: 100%;
+    border-radius: 0.25rem;
+    background-color: white;
+    padding: 0.5rem;
+
+    & h6 {
+      color: $light-blue;
+    }
+    &-number {
+      margin-top: -4px;
+      font-size: 3rem;
+      color: $dark-gray;
+    }
+  }
+}
+
+.app {
+  position: relative;
+  width: 100%;
+  height: 95vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__container {
+    width: 100%;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__inner {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 30px;
+  }
+
+  &__triangle {
+    position: absolute;
+    top: 45px;
+    & svg {
+      width: 100%;
+      height: 100%;
+      & path {
+        transform: scale(0.7);
+        transform-origin: center;
+        stroke-width: 25;
+      }
+    }
+  }
+
+  &__upper-block {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  &__lower-block {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+  }
+
+  &__card {
+    position: relative;
+    width: 130px;
+    height: 130px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: green;
+    border-radius: 100%;
+    z-index: 1;
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      border-radius: 100%;
+      background-color: white;
+      box-shadow: 0 4px 0px $light-gray inset;
+    }
+  }
+  &__paper {
+    background-color: $blue-primary;
+    box-shadow: 0 -4px 0px $blue-gradient inset;
+    &::after {
+      content: "";
+      background: white url("../images/icon-paper.svg") no-repeat center;
+    }
+  }
+  &__scissor {
+    background-color: $yellow-primary;
+    box-shadow: 0 -4px 0px $yellow-gradient inset;
+    &::after {
+      content: "";
+      background: white url("../images/icon-scissors.svg") no-repeat center;
+    }
+  }
+  &__rock {
+    background-color: $red-primary;
+    box-shadow: 0 -4px 0px $red-gradient inset;
+    &::after {
+      content: "";
+      background: white url("../images/icon-rock.svg") no-repeat center;
+    }
+  }
+}
+
+.rules__btn {
+  width: 100px;
+  height: 40px;
+  background-color: transparent;
+  border: 2px solid $lighter-gray;
+  border-radius: 0.5rem;
+  color: white;
+  font-family: "Kumbh Sans", sans-serif;
+  font-size: 0.8rem;
+}
