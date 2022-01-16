@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+  <title>Frontend Mentor | Rock, Paper, Scissors</title>
+  <link rel="stylesheet" href="style/style.css">
+  <script src="js/index.js" defer></script>
+  <!-- Score
+  Rules
+
+  You Picked
+  The House Picked
+
+  You Win
+  You Lose
+
+  Play Again -->
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution {
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .attribution a {
+      color: hsl(228, 45%, 44%);
+    }
+  </style>
+</head>
+
+<body>
+  <main class="app">
+    <div class="header">
+      <div class="header__text">
+        <h1>ROCK<br>PAPER<br> SCISSOR</h1>
+      </div>
+      <div class="header__score">
+        <h6>SCORE</h6>
+        <div class="header__score-number">0</div>
+      </div>
+    </div>
+    <section class="app__container">
+      <div class="app__inner">
+        <div class="app__triangle">
+          <svg xmlns="http://www.w3.org/2000/svg">
+            <path fill="none" stroke="#000" stroke-width="15"
+              d="M291.5 7.5H4.574c3.119 0 52.416 84.667 147.892 254L291.5 7.5z" opacity=".2" /></svg>
+        </div>
+        <div class="app__upper-block">
+          <div class="app__paper app__card">
+            <div class="inner-card"></div>
+          </div>
+          <div class="app__scissor app__card">
+            <div class="inner-card"></div>
+          </div>
+        </div>
+        <div class="app__lower-block">
+          <div class="app__rock app__card">
+            <div class="inner-card"></div>
+          </div>
+        </div>
+    </section>
+    <section class="rules">
+      <button class="rules__btn">RULES</button>
+    </section>
+  </main>
+
+  <footer>
+    <div class="attribution">
+      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+      Coded by <a href="#">Your Name Here</a>.
+    </div>
+  </footer>
+
+</body>
+
+</html>
