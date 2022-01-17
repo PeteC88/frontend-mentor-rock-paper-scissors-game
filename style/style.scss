@@ -186,12 +186,33 @@ body {
 
 .result {
   width: 100%;
-  padding: 0 13%;
+  padding: 15% 8% 0 8%;
+  display: none;
 
   &__container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+
+    &.player::before {
+      content: "";
+      position: absolute;
+      top: -90px;
+      width: 300px;
+      height: 300px;
+      border-radius: 100%;
+      /* Use % to "stop" the blur between colors*/
+      background-image: radial-gradient(
+        #2b3654,
+        #2b3654 44%,
+        #253453 44%,
+        #253453 57%,
+        #223150 57%,
+        #223150
+      );
+      z-index: -1;
+    }
   }
 
   &__card {
@@ -213,6 +234,32 @@ body {
     }
   }
 
+  &__game-over {
+    width: 100%;
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & h1 {
+      text-align: center;
+      color: white;
+      font-family: "Kumbh Sans", sans-serif;
+      font-size: 3rem;
+    }
+
+    & button {
+      width: 80%;
+      padding: 1rem;
+      background-color: white;
+      border: 1px solid black;
+      border-radius: 0.5rem;
+      color: $dark-radial;
+      font-family: "Kumbh Sans", sans-serif;
+      font-size: 1rem;
+    }
+  }
+
   & p {
     color: white;
     text-align: center;
@@ -221,13 +268,39 @@ body {
   }
 }
 
-.rules__btn {
-  width: 100px;
-  height: 40px;
-  background-color: transparent;
-  border: 2px solid $lighter-gray;
-  border-radius: 0.5rem;
-  color: white;
-  font-family: "Kumbh Sans", sans-serif;
-  font-size: 0.8rem;
+.rules {
+  &__btn {
+    width: 100px;
+    height: 40px;
+    background-color: transparent;
+    border: 2px solid $lighter-gray;
+    border-radius: 0.5rem;
+    color: white;
+    font-family: "Kumbh Sans", sans-serif;
+    font-size: 0.8rem;
+  }
+
+  &__explaination-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: white;
+    z-index: 100;
+    display: none;
+  }
+
+  &__text {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: 100%;
+    height: 15%;
+    font-size: 1.7rem;
+  }
 }

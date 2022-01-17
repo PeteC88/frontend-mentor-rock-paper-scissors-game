@@ -236,7 +236,8 @@ body {
 
 .result {
   width: 100%;
-  padding: 0 13%;
+  padding: 15% 8% 0 8%;
+  display: none;
 }
 
 .result__container {
@@ -250,6 +251,19 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  position: relative;
+}
+
+.result__container.player::before {
+  content: "";
+  position: absolute;
+  top: -90px;
+  width: 300px;
+  height: 300px;
+  border-radius: 100%;
+  /* Use % to "stop" the blur between colors*/
+  background-image: radial-gradient(#2b3654, #2b3654 44%, #253453 44%, #253453 57%, #223150 57%, #223150);
+  z-index: -1;
 }
 
 .result__card {
@@ -301,6 +315,39 @@ body {
           box-shadow: 0 4px 0px rgba(128, 128, 128, 0.331) inset;
 }
 
+.result__game-over {
+  width: 100%;
+  margin-top: 80px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.result__game-over h1 {
+  text-align: center;
+  color: white;
+  font-family: "Kumbh Sans", sans-serif;
+  font-size: 3rem;
+}
+
+.result__game-over button {
+  width: 80%;
+  padding: 1rem;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  color: #141539;
+  font-family: "Kumbh Sans", sans-serif;
+  font-size: 1rem;
+}
+
 .result p {
   color: white;
   text-align: center;
@@ -317,5 +364,43 @@ body {
   color: white;
   font-family: "Kumbh Sans", sans-serif;
   font-size: 0.8rem;
+}
+
+.rules__explaination-section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: white;
+  z-index: 100;
+  display: none;
+}
+
+.rules__text {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  width: 100%;
+  height: 15%;
+  font-size: 1.7rem;
 }
 /*# sourceMappingURL=style.css.map */
