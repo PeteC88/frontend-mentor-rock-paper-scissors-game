@@ -1,5 +1,19 @@
 /* fonts */
 @import url("https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@600;700&display=swap");
+/* Responsive*/
+$desktop: 1366px;
+$tablet: 425px;
+
+@mixin for-desktop-up {
+  @media (min-width: $desktop) {
+    @content;
+  }
+}
+@mixin for-tablet-up {
+  @media (min-width: $tablet) {
+    @content;
+  }
+}
 
 /* Background */
 $radial: hsl(214, 47%, 23%);
@@ -36,8 +50,18 @@ $light-gray: rgba(128, 128, 128, 0.331);
     width: 100px;
     height: 100px;
     border-radius: 100%;
-    /* background-color: white; */
     box-shadow: 0 4px 0px $light-gray inset;
+
+    @include for-desktop-up() {
+      width: 130px;
+      height: 130px;
+      box-shadow: 0 8px 0px $light-gray inset;
+    }
+  }
+
+  @include for-desktop-up() {
+    width: 170px;
+    height: 170px;
   }
 }
 
@@ -52,17 +76,22 @@ $light-gray: rgba(128, 128, 128, 0.331);
 body {
   font-family: "Kumbh Sans", sans-serif;
   background: linear-gradient($radial, $dark-radial);
+  width: 100%;
 }
 .header {
   position: relative;
   display: flex;
   justify-content: space-between;
   width: 80%;
+  max-width: 600px;
   height: 100px;
   border: 2px solid $lighter-gray;
   border-radius: 0.5rem;
   padding: 0.5rem;
-  /* margin-bottom: 30%; */
+
+  @include for-desktop-up() {
+    width: 600px;
+  }
 
   &__text {
     display: block;
@@ -77,11 +106,15 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 30%;
+    width: 100px;
     height: 100%;
     border-radius: 0.25rem;
     background-color: white;
     padding: 0.5rem;
+
+    @include for-desktop-up() {
+      width: 20%;
+    }
 
     & h6 {
       color: $light-blue;
@@ -109,27 +142,59 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: transform 3s;
+    transform-style: preserve-3d;
+
+    @include for-desktop-up() {
+      width: 500px;
+    }
+  }
+
+  &__flip {
+    backface-visibility: hidden;
+  }
+
+  &__flip--active {
+    transform: rotateY(180deg);
   }
 
   &__inner {
-    position: relative;
-    width: 100%;
+    position: absolute;
+    width: 380px;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 0 30px;
+
+    @include for-desktop-up() {
+      width: 500px;
+    }
   }
 
   &__triangle {
     position: absolute;
     top: 45px;
+    left: 10%;
+
+    @include for-desktop-up() {
+      top: 80px;
+      width: 100%;
+      left: 100px;
+    }
+
     & svg {
       width: 100%;
       height: 100%;
+
       & path {
         transform: scale(0.7);
         transform-origin: center;
         stroke-width: 25;
+
+        @include for-desktop-up() {
+          transform: scale(1);
+          stroke-width: 15;
+        }
       }
     }
   }
@@ -158,6 +223,9 @@ body {
         content: "";
         background: white url("../images/icon-paper.svg") no-repeat center;
       }
+      @include for-desktop-up() {
+        box-shadow: 0 -8px 0px $blue-gradient inset;
+      }
     }
   }
   &__scissor {
@@ -168,6 +236,9 @@ body {
       &::after {
         content: "";
         background: white url("../images/icon-scissors.svg") no-repeat center;
+      }
+      @include for-desktop-up() {
+        box-shadow: 0 -8px 0px $yellow-gradient inset;
       }
     }
   }
@@ -180,15 +251,25 @@ body {
         content: "";
         background: white url("../images/icon-rock.svg") no-repeat center;
       }
+      @include for-desktop-up() {
+        box-shadow: 0 -8px 0px $red-gradient inset;
+      }
     }
   }
 }
 
 .result {
   width: 100%;
-  padding: 15% 8% 0 8%;
-  display: none;
+  max-width: 550px;
+  padding: 5% 8% 0 8%;
+  position: absolute;
+  transform: rotateY(180deg);
 
+  @include for-desktop-up() {
+    width: 600px;
+    padding: 0;
+    top: 35%;
+  }
   &__container {
     display: flex;
     flex-direction: column;
@@ -212,12 +293,15 @@ body {
         #223150
       );
       z-index: -1;
+
+      @include for-desktop-up() {
+        top: -65px;
+      }
     }
   }
 
   &__card {
     @include cardStyle;
-
     transform: scale(0.8);
     transform-origin: center;
     margin-bottom: 30px;
@@ -236,7 +320,7 @@ body {
 
   &__game-over {
     width: 100%;
-    margin-top: 80px;
+    margin-top: 25px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -245,11 +329,11 @@ body {
       text-align: center;
       color: white;
       font-family: "Kumbh Sans", sans-serif;
-      font-size: 3rem;
+      font-size: 2.5rem;
     }
 
     & button {
-      width: 80%;
+      width: 250px;
       padding: 1rem;
       background-color: white;
       border: 1px solid black;
@@ -278,21 +362,55 @@ body {
     color: white;
     font-family: "Kumbh Sans", sans-serif;
     font-size: 0.8rem;
+
+    @include for-desktop-up() {
+      position: relative;
+      left: 600px;
+    }
+  }
+
+  &__main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70%;
+
+    @include for-tablet-up() {
+      position: relative;
+      top: 20px;
+    }
+  }
+
+  &__close-btn {
+    display: flex;
+    justify-content: center;
+
+    @include for-tablet-up() {
+      position: absolute;
+      top: 45px;
+      right: 45px;
+    }
   }
 
   &__explaination-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    position: absolute;
-    top: 0;
-    right: 0;
     width: 100%;
     height: 100vh;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
     background-color: white;
     z-index: 100;
     display: none;
+
+    @include for-tablet-up() {
+      width: 400px;
+      height: 380px;
+      border-radius: 20px;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
 
   &__text {
@@ -302,5 +420,11 @@ body {
     width: 100%;
     height: 15%;
     font-size: 1.7rem;
+
+    @include for-tablet-up() {
+      height: 70px;
+      justify-content: left;
+      padding-left: 3.5rem;
+    }
   }
 }
