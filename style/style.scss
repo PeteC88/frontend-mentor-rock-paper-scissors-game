@@ -43,6 +43,7 @@ $light-gray: rgba(128, 128, 128, 0.331);
   background-color: $dark-radial;
   border-radius: 100%;
   z-index: 1;
+  cursor: pointer;
 
   &::after {
     content: "";
@@ -65,6 +66,51 @@ $light-gray: rgba(128, 128, 128, 0.331);
   }
 }
 
+@mixin paper {
+  /* this formula increases the specificity as if I wrote .app__paper.app__paper */
+  &#{&} {
+    background-color: $blue-primary;
+    box-shadow: 0 -4px 0px $blue-gradient inset;
+    &::after {
+      content: "";
+      background: white url("../images/icon-paper.svg") no-repeat center;
+    }
+    @include for-desktop-up() {
+      box-shadow: 0 -8px 0px $blue-gradient inset;
+    }
+  }
+}
+
+@mixin scissors {
+  /* this formula increases the specificity as if I wrote .app__scissor.app__scissor */
+  &#{&} {
+    background-color: $yellow-primary;
+    box-shadow: 0 -4px 0px $yellow-gradient inset;
+    &::after {
+      content: "";
+      background: white url("../images/icon-scissors.svg") no-repeat center;
+    }
+    @include for-desktop-up() {
+      box-shadow: 0 -8px 0px $yellow-gradient inset;
+    }
+  }
+}
+
+@mixin rock {
+  /* this formula increases the specificity as if I wrote .app__rock.rock */
+  &#{&} {
+    background-color: $red-primary;
+    box-shadow: 0 -4px 0px $red-gradient inset;
+    &::after {
+      content: "";
+      background: white url("../images/icon-rock.svg") no-repeat center;
+    }
+    @include for-desktop-up() {
+      box-shadow: 0 -8px 0px $red-gradient inset;
+    }
+  }
+}
+
 *,
 ::before,
 ::after {
@@ -75,7 +121,7 @@ $light-gray: rgba(128, 128, 128, 0.331);
 
 body {
   font-family: "Kumbh Sans", sans-serif;
-  background: linear-gradient($radial, $dark-radial);
+  background: radial-gradient(at top, $radial, $dark-radial);
   width: 100%;
 }
 .header {
@@ -130,11 +176,17 @@ body {
 .app {
   position: relative;
   width: 100%;
-  height: 95vh;
+  height: 98vh;
   display: flex;
+  display: -webkit-box; /* to fix Safari bug with flexbox*/
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  &__flip {
+    backface-visibility: hidden;
+    transform: translateX(0);
+  }
 
   &__container {
     width: 100%;
@@ -142,7 +194,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: transform 3s;
+    transition: transform 1s ease-in-out;
     transform-style: preserve-3d;
 
     @include for-desktop-up() {
@@ -150,12 +202,9 @@ body {
     }
   }
 
-  &__flip {
-    backface-visibility: hidden;
-  }
-
   &__flip--active {
     transform: rotateY(180deg);
+    pointer-events: none;
   }
 
   &__inner {
@@ -215,46 +264,13 @@ body {
     @include cardStyle();
   }
   &__paper {
-    /* this formula increases the specificity as if I wrote .app__paper.app__paper */
-    &#{&} {
-      background-color: $blue-primary;
-      box-shadow: 0 -4px 0px $blue-gradient inset;
-      &::after {
-        content: "";
-        background: white url("../images/icon-paper.svg") no-repeat center;
-      }
-      @include for-desktop-up() {
-        box-shadow: 0 -8px 0px $blue-gradient inset;
-      }
-    }
+    @include paper();
   }
-  &__scissor {
-    /* this formula increases the specificity as if I wrote .app__scissor.app__scissor */
-    &#{&} {
-      background-color: $yellow-primary;
-      box-shadow: 0 -4px 0px $yellow-gradient inset;
-      &::after {
-        content: "";
-        background: white url("../images/icon-scissors.svg") no-repeat center;
-      }
-      @include for-desktop-up() {
-        box-shadow: 0 -8px 0px $yellow-gradient inset;
-      }
-    }
+  &__scissors {
+    @include scissors();
   }
   &__rock {
-    /* this formula increases the specificity as if I wrote .app__rock.rock */
-    &#{&} {
-      background-color: $red-primary;
-      box-shadow: 0 -4px 0px $red-gradient inset;
-      &::after {
-        content: "";
-        background: white url("../images/icon-rock.svg") no-repeat center;
-      }
-      @include for-desktop-up() {
-        box-shadow: 0 -8px 0px $red-gradient inset;
-      }
-    }
+    @include rock();
   }
 }
 
@@ -279,7 +295,7 @@ body {
     &.player::before {
       content: "";
       position: absolute;
-      top: -90px;
+      top: -85px;
       width: 300px;
       height: 300px;
       border-radius: 100%;
@@ -293,10 +309,16 @@ body {
         #223150
       );
       z-index: -1;
+      display: none;
+      transition: transform 1s;
 
       @include for-desktop-up() {
         top: -65px;
       }
+    }
+    &.player--active::before {
+      animation: scaleAnimation 0.5s;
+      display: block;
     }
   }
 
@@ -318,12 +340,29 @@ body {
     }
   }
 
+  &__paper {
+    @include paper();
+    animation: fadeIn 0.5s;
+  }
+
+  &__scissors {
+    @include scissors();
+    animation: fadeIn 0.5s;
+  }
+
+  &__rock {
+    @include rock();
+    animation: fadeIn 0.5s;
+  }
+
   &__game-over {
     width: 100%;
-    margin-top: 25px;
+    margin-top: 35px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    display: none;
+    animation: scaleAnimation 0.5s;
 
     & h1 {
       text-align: center;
@@ -341,6 +380,9 @@ body {
       color: $dark-radial;
       font-family: "Kumbh Sans", sans-serif;
       font-size: 1rem;
+      margin: 0 auto;
+      z-index: 1;
+      pointer-events: all;
     }
   }
 
@@ -362,6 +404,7 @@ body {
     color: white;
     font-family: "Kumbh Sans", sans-serif;
     font-size: 0.8rem;
+    cursor: pointer;
 
     @include for-desktop-up() {
       position: relative;
@@ -384,6 +427,7 @@ body {
   &__close-btn {
     display: flex;
     justify-content: center;
+    cursor: pointer;
 
     @include for-tablet-up() {
       position: absolute;
@@ -401,7 +445,10 @@ body {
     left: 0;
     background-color: white;
     z-index: 100;
-    display: none;
+    display: block;
+    opacity: 0;
+    transition: all 0.7s ease-in-out;
+    transform: translateY(-100%);
 
     @include for-tablet-up() {
       width: 400px;
@@ -409,7 +456,16 @@ body {
       border-radius: 20px;
       top: 45%;
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, -100vh);
+    }
+
+    &--active {
+      opacity: 1;
+      transform: translateY(0);
+
+      @include for-tablet-up() {
+        transform: translate(-50%, -50%);
+      }
     }
   }
 
@@ -426,5 +482,46 @@ body {
       justify-content: left;
       padding-left: 3.5rem;
     }
+  }
+}
+
+/*Animations*/
+@keyframes fadeIn {
+  0% {
+    opacity: 0.1;
+  }
+  20% {
+    opacity: 0.3;
+  }
+  40% {
+    opacity: 0.3;
+  }
+  60% {
+    opacity: 0.5;
+  }
+  80% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleAnimation {
+  0% {
+    transform: scale(0.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes dropDown {
+  0% {
+    display: block;
+    transform: translateY(-100vh);
+  }
+  100% {
+    transform: translateY(0);
   }
 }
