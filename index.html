@@ -11,22 +11,13 @@
   <title>Frontend Mentor | Rock, Paper, Scissors</title>
   <link rel="stylesheet" href="style/style.css">
   <script src="js/index.js" defer></script>
-  <!-- Score
-  Rules
-
-  You Picked
-  The House Picked
-
-  You Win
-  You Lose
-
-  Play Again -->
 
   <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
   <style>
     .attribution {
       font-size: 11px;
       text-align: center;
+      color: white;
     }
 
     .attribution a {
@@ -54,15 +45,15 @@
               d="M291.5 7.5H4.574c3.119 0 52.416 84.667 147.892 254L291.5 7.5z" opacity=".2" /></svg>
         </div>
         <div class="app__upper-block">
-          <div class="app__paper app__card">
+          <div class="app__paper app__card" data-value="paper">
             <div class="inner-card"></div>
           </div>
-          <div class="app__scissor app__card">
+          <div class="app__scissors app__card" data-value="scissors">
             <div class="inner-card"></div>
           </div>
         </div>
         <div class="app__lower-block">
-          <div class="app__rock app__card">
+          <div class="app__rock app__card" data-value="rock">
             <div class="inner-card"></div>
           </div>
         </div>
@@ -71,16 +62,16 @@
         <div class="result__inner">
           <div class="app__upper-block result__block">
             <div class="result__container player">
-              <div class="app__rock  result__card--active result__card"></div>
+              <div class="result__card"></div>
               <p>You picked</p>
             </div>
             <div class="result__container opponent">
-              <div class="result__card app__scissor  result__card--active"></div>
+              <div class="result__card"></div>
               <p>The house picked</p>
             </div>
           </div>
           <div class="result__game-over">
-            <h1 class="result__text">YOU WIN</h1>
+            <h1 class="result__text"></h1>
             <button class="result__button">PLAY AGAIN</button>
 
           </div>
@@ -175,7 +166,7 @@
   <footer>
     <div class="attribution">
       Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
-      Coded by <a href="#">Your Name Here</a>.
+      Coded by <a href="https://github.com/PeteC88">Pietro Ciccarello</a>.
     </div>
   </footer>
 
