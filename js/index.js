@@ -98,6 +98,11 @@ let appCards = {
         this.playAgainButton.addEventListener("click", () => {
             this.appContainer.classList.remove("app__flip--active");
 
+            /* close the rules section if the button play again is pressed */
+            if (rulesSection.rulesExplaination.classList.contains("rules__explaination-section--active")) {
+                rulesSection.rulesExplaination.classList.remove("rules__explaination-section--active")
+            }
+
             setTimeout(() => {
                 this.playerChoise.classList.remove(this.classPlayerResult, "result__card--active");
                 this.resultContainer.classList.remove("player--active");
@@ -117,11 +122,13 @@ let rulesSection = {
     activeRulesExplaination() {
         this.rulesBtn.addEventListener("click", () => {
             this.rulesExplaination.classList.add("rules__explaination-section--active");
+
         })
     },
     closeRulesExplaination() {
         this.rulesBtnClose.addEventListener("click", () => {
             this.rulesExplaination.classList.remove("rules__explaination-section--active");
+
         })
     }
 }
