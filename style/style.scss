@@ -4,6 +4,11 @@
 $desktop: 1366px;
 $tablet: 425px;
 
+@mixin mobile-landscape {
+  @media (max-width: 9000px) and (max-height: 450px) {
+    @content;
+  }
+}
 @mixin for-desktop-up {
   @media (min-width: $desktop) {
     @content;
@@ -45,6 +50,16 @@ $light-gray: rgba(128, 128, 128, 0.331);
   z-index: 1;
   cursor: pointer;
 
+  @include mobile-landscape() {
+    width: 100px;
+    height: 100px;
+  }
+
+  @include for-desktop-up() {
+    width: 170px;
+    height: 170px;
+  }
+
   &::after {
     content: "";
     position: absolute;
@@ -58,11 +73,12 @@ $light-gray: rgba(128, 128, 128, 0.331);
       height: 130px;
       box-shadow: 0 8px 0px $light-gray inset;
     }
-  }
 
-  @include for-desktop-up() {
-    width: 170px;
-    height: 170px;
+    @include mobile-landscape() {
+      width: 75px;
+      height: 75px;
+      box-shadow: 0 4px 0px $light-gray inset;
+    }
   }
 }
 
@@ -135,6 +151,10 @@ body {
   border-radius: 0.5rem;
   padding: 0.5rem;
 
+  @include mobile-landscape() {
+    width: 60%;
+    height: 80px;
+  }
   @include for-desktop-up() {
     width: 600px;
   }
@@ -158,6 +178,10 @@ body {
     background-color: white;
     padding: 0.5rem;
 
+    @include mobile-landscape() {
+      width: 15%;
+    }
+
     @include for-desktop-up() {
       width: 20%;
     }
@@ -169,6 +193,10 @@ body {
       margin-top: -4px;
       font-size: 3rem;
       color: $dark-gray;
+
+      @include mobile-landscape() {
+        font-size: 2rem;
+      }
     }
   }
 }
@@ -225,6 +253,10 @@ body {
     top: 45px;
     left: 10%;
 
+    @include mobile-landscape() {
+      top: 15px;
+    }
+
     @include for-desktop-up() {
       top: 80px;
       width: 100%;
@@ -252,6 +284,10 @@ body {
     width: 100%;
     display: flex;
     justify-content: space-between;
+
+    @include mobile-landscape() {
+      width: 90%;
+    }
   }
   &__lower-block {
     width: 100%;
@@ -315,6 +351,11 @@ body {
       @include for-desktop-up() {
         top: -65px;
       }
+      @include mobile-landscape() {
+        top: -40px;
+        width: 180px;
+        height: 180px;
+      }
     }
     &.player--active::before {
       animation: scaleAnimation 0.5s;
@@ -364,11 +405,19 @@ body {
     display: none;
     animation: scaleAnimation 0.5s;
 
+    @include mobile-landscape() {
+      margin-top: 5px;
+    }
+
     & h1 {
       text-align: center;
       color: white;
       font-family: "Kumbh Sans", sans-serif;
       font-size: 2.5rem;
+
+      @include mobile-landscape() {
+        font-size: 1.5rem;
+      }
     }
 
     & button {
@@ -383,6 +432,11 @@ body {
       margin: 0 auto;
       z-index: 1;
       pointer-events: all;
+
+      @include mobile-landscape() {
+        width: 150px;
+        padding: 0.5rem;
+      }
     }
   }
 
@@ -395,6 +449,16 @@ body {
 }
 
 .rules {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  /*  @include mobile-landscape() {
+    display: flex;
+    justify-content: center;
+    }
+ */
+
   &__btn {
     width: 100px;
     height: 40px;
@@ -406,7 +470,14 @@ body {
     font-size: 0.8rem;
     cursor: pointer;
 
+    @include mobile-landscape() {
+      position: relative;
+      left: 20%;
+      bottom: 15px;
+    }
+
     @include for-desktop-up() {
+      display: block;
       position: relative;
       left: 600px;
     }
@@ -434,6 +505,10 @@ body {
       top: 45px;
       right: 45px;
     }
+
+    @include mobile-landscape() {
+      top: 20px;
+    }
   }
 
   &__explaination-section {
@@ -459,12 +534,23 @@ body {
       transform: translate(-50%, -100vh);
     }
 
+    @include mobile-landscape() {
+      width: 330px;
+      height: 300px;
+    }
+
     &--active {
       opacity: 1;
       transform: translateY(0);
 
       @include for-tablet-up() {
         transform: translate(-50%, -50%);
+      }
+    }
+
+    & svg {
+      @include mobile-landscape() {
+        transform: scale(0.7);
       }
     }
   }
@@ -481,6 +567,11 @@ body {
       height: 70px;
       justify-content: left;
       padding-left: 3.5rem;
+    }
+
+    @include mobile-landscape() {
+      height: 40px;
+      font-size: 1.3rem;
     }
   }
 }
